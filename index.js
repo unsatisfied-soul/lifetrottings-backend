@@ -16,7 +16,7 @@ async function run(){
         await client.connect()
 
         const lifetrottingDb = client.db("lifetrotting").collection("travelPlaces");
-        const  travelExperince= client.db('travelExperinece').collection('travelOrder')
+        const  travelExperince= client.db('travelExperinece').collection('travelExperince')
 
         app.post('/travleExperience', async(req,res)=> {
             const title = req.body.title
@@ -24,8 +24,8 @@ async function run(){
             const writer = req.body.writer
             const date = req.body.date
             const image = req.body.image
-            const encodepic = req.body.image
             // const bufferImage = Buffer.from(encodepic,'base64')
+            console.log(title,desc, writer,date,image)
             const travelExperincedata = {
                 title,
                 writer,
