@@ -14,8 +14,6 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run(){
     try{
         await client.connect()
-
-        const lifetrottingDb = client.db("lifetrotting").collection("travelPlaces");
         const  travelExperince= client.db('travelExperinece').collection('travelExperince')
 
         app.post('/travleExperience', async(req,res)=> {
