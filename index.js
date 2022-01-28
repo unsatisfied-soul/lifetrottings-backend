@@ -1,14 +1,14 @@
-const express = require('express')
+const express = require('express');
 const { MongoClient } = require('mongodb');
-const bodyParser = require("body-parser");
-const cors = require('cors')
-const ObjectId = require('mongodb').ObjectId
-require('dotenv').config()
 const app = express();
-const port = process.env.PORT || 5000;
+const cors = require('cors')
+const ObjectId = require('mongodb').ObjectId;
+const port = process.env.PORT || 5000
+require('dotenv').config()
+const fileUpload = require('express-fileupload')
 app.use(cors())
-app.use(express.json());
-app.use(bodyParser.json());
+app.use(express.json())
+app.use(fileUpload())
 
 
 const uri =`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.h6wi6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -18,9 +18,9 @@ async function run(){
         await client.connect()
         const lifetrooting =  client.db('lifetrooting')
         const travelExperince = lifetrooting.collection('travelExperince')
+        const usersData = lifetrooting.collection('users')
 
         app.post('/experience', async(req,res)=> {
-            console.log(req.body)
             const title = req.body.title
             const desc = req.body.desc
             const date = req.body.date
@@ -42,9 +42,18 @@ async function run(){
             const travelingplace = await cursor.toArray()
             res.send(travelingplace)
         })
+
+        //user post
+        app.post('/users', async(req,res)=> {
+            const user = req.body
+            const result = await usersData.insertOne(user)
+            res.json(result)
+            console.log(req.body)
+        })
         
 
     }
+    catch(error){}
     finally{
 
     }
