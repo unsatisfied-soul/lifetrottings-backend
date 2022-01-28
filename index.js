@@ -37,7 +37,7 @@ async function run(){
             const result = await travelExperince.insertOne(travelExperincedata)
             res.json(result)
         })
-        app.get('/travleExperience', async(req,res)=> {
+        app.get('/experience', async(req,res)=> {
             const cursor = travelExperince.find({})
             const travelingplace = await cursor.toArray()
             res.send(travelingplace)
