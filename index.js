@@ -50,6 +50,13 @@ async function run(){
             res.json(result)
             console.log(req.body)
         })
+
+        //get users
+        app.get('/users', async(req,res)=> {
+            const cursor = usersData.find({})
+            const alluser = await cursor.toArray()
+            res.send(alluser)
+        })
         
 
     }
