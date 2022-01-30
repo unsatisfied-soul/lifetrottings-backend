@@ -57,6 +57,15 @@ async function run(){
             const alluser = await cursor.toArray()
             res.send(alluser)
         })
+
+        //put user Admin
+        app.put('/users/admin', async(req,res)=> {
+            const user = req.body;
+            const filter = {email : user.email};
+            const updateDoc = {$set:{role:'admin'}}
+            const result = await usersData.updateOne(filter, updateDoc)
+            res.json(result)
+        })
         
 
     }
