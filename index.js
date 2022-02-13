@@ -42,6 +42,13 @@ async function run(){
             const travelingplace = await cursor.toArray()
             res.send(travelingplace)
         })
+        //get single experience
+        app.get('/experience/:id', async(req,res)=> {
+            const id = req.params.id
+            const query = {_id: ObjectId(id)}
+            const result = await travelExperince.findOne(query)
+            res.send('gettingsoon')
+        })
 
         //user post
         app.post('/users', async(req,res)=> {
