@@ -47,7 +47,7 @@ async function run(){
             const id = req.params.id
             const query = {_id: ObjectId(id)}
             const result = await travelExperince.findOne(query)
-            res.send('gettingsoon')
+            res.send(result)
         })
 
         //user post
